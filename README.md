@@ -1,7 +1,7 @@
 # Project-01
 
-# Your Name
+# Kenji Williams-McCall
 
-# Your Github username
+# KMFKenji
 
 # List the things you added for points
