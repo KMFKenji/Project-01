@@ -1,19 +1,61 @@
 /*
     Project 01
     
-    Requirements (for 15 base points)
-    - Create an interactive fiction story with at least 8 knots 
-    - Create at least one major choice that the player can make
-    - Reflect that choice back to the player
-    - Include at least one loop
-    
-    To get a full 20 points, expand upon the game in the following ways
-    [+2] Include more than eight passages
-    [+1] Allow the player to pick up items and change the state of the game if certain items are in the inventory. Acknowledge if a player does or does not have a certain item
-    [+1] Give the player statistics, and allow them to upgrade once or twice. Gate certain options based on statistics (high or low. Maybe a weak person can only do things a strong person can't, and vice versa)
-    [+1] Keep track of visited passages and only display the description when visiting for the first time (or requested)
-    
-    Make sure to list the items you changed for points in the Readme.md. I cannot guess your intentions!
+    VAR has_map = false
+VAR agility = 1
+VAR visited_forest = false
+
+=== start ===
+You stand at the edge of a dense forest. A sign reads: "Beware of the Lost Paths."
+
+* [Enter the forest] -> enter_forest
+* [Turn back] -> turn_back
+
+=== enter_forest ===
+{visited_forest:
+    The trees seem even taller and more menacing than before.
+- else:
+    The forest is quiet, except for the distant hoot of an owl. Mist clings to the ground.
+    ~ visited_forest = true
+}
+
+* [Venture deeper] -> deeper_forest
+* [Search for clues] -> find_map
+
+=== find_map ===
+You find an old, tattered map wedged between the roots of a tree.
+~ has_map = true
+
+* [Continue deeper] -> deeper_forest
+
+=== deeper_forest ===
+You reach a fork in the path.
+{has_map:
+    You follow the map’s markings and safely find a hidden glade.
+    -> hidden_glade
+- else:
+    Without direction, you become hopelessly lost.
+    -> enter_forest
+}
+
+=== hidden_glade ===
+In the glade, you find an ancient stone altar. A shadowy figure appears.
+{agility >= 2:
+    You swiftly dodge its attack and uncover a hidden passage!
+    -> secret_exit
+- else:
+    The figure overpowers you, forcing you to flee.
+    -> enter_forest
+}
+
+=== secret_exit ===
+Congratulations! You have escaped the enchanted forest and uncovered its secrets!
+-> END
+
+=== turn_back ===
+You decide this journey isn't worth the risk and head home.
+-> END
+
 
 */
 
